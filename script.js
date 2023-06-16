@@ -1,74 +1,84 @@
-const validMoves = ["rock", "paper", "scissors"];
+const playerMoves = document.querySelectorAll(".playerMoves > div");
 
-function getComputerChoice() {
+playerMoves.forEach(playerMove => playerMove.addEventListener("mouseenter", e => e.target.classList.add("playerMoveHover")));
 
-    return validMoves[(Math.floor(Math.random() * validMoves.length))];
-}
+playerMoves.forEach(playerMove => playerMove.addEventListener("mouseleave", e => e.target.classList.remove("playerMoveHover")));
 
-// console.log(getComputerChoice());
+// function selectMove(e) {
+//     console.log(e.target);
+// }
 
-function playRound(playerSelection, computerSelection) {
+// const validMoves = ["rock", "paper", "scissors"];
 
-    let results;
-    playerSelection = playerSelection.toLowerCase().trim();
-    computerSelection = computerSelection.toLowerCase().trim();
+// function getComputerChoice() {
 
-    if (playerSelection === computerSelection) {
-        results = `Tie Game! ${playerSelection} equals ${computerSelection}`;
-    }
-    else if (playerSelection === "rock" && computerSelection === "paper" || playerSelection === "paper" && computerSelection == "scissors" || playerSelection === "scissors" && computerSelection === "rock") {
-        results = `You Lose! ${computerSelection} beats ${playerSelection}`;
-    }
-    else {
-        results = `You Win! ${playerSelection} beats ${computerSelection}`;
-    }
+//     return validMoves[(Math.floor(Math.random() * validMoves.length))];
+// }
 
-    return results;
-}
+// // console.log(getComputerChoice());
 
-// const playerSelection = "scissors";
-// const computerSelection = getComputerChoice();
-// console.log(playRound(playerSelection, computerSelection));
+// function playRound(playerSelection, computerSelection) {
 
-function game() {
+//     let results;
+//     playerSelection = playerSelection.toLowerCase().trim();
+//     computerSelection = computerSelection.toLowerCase().trim();
 
-    let playerSelection;
-    let computerSelection;
-    let matchResults;
-    let gameResults;
-    let playerScore = 0;
-    let computerScore = 0;
+//     if (playerSelection === computerSelection) {
+//         results = `Tie Game! ${playerSelection} equals ${computerSelection}`;
+//     }
+//     else if (playerSelection === "rock" && computerSelection === "paper" || playerSelection === "paper" && computerSelection == "scissors" || playerSelection === "scissors" && computerSelection === "rock") {
+//         results = `You Lose! ${computerSelection} beats ${playerSelection}`;
+//     }
+//     else {
+//         results = `You Win! ${playerSelection} beats ${computerSelection}`;
+//     }
+
+//     return results;
+// }
+
+// // const playerSelection = "scissors";
+// // const computerSelection = getComputerChoice();
+// // console.log(playRound(playerSelection, computerSelection));
+
+// function game() {
+
+//     let playerSelection;
+//     let computerSelection;
+//     let matchResults;
+//     let gameResults;
+//     let playerScore = 0;
+//     let computerScore = 0;
  
 
-    for (i = 0; i < 5; i++){
+//     for (i = 0; i < 5; i++){
 
-        playerSelection = prompt("Enter Move:");
-        computerSelection = getComputerChoice();
-        matchResults = playRound(playerSelection, computerSelection);
+//         playerSelection = prompt("Enter Move:");
+//         computerSelection = getComputerChoice();
+//         matchResults = playRound(playerSelection, computerSelection);
 
-        console.log(matchResults);
+//         console.log(matchResults);
 
-        if (matchResults.includes("Win")) {
-            ++playerScore;
-        }
-        else if (matchResults.includes("Lose")) {
-            ++computerScore;
-        }
-    }
+//         if (matchResults.includes("Win")) {
+//             ++playerScore;
+//         }
+//         else if (matchResults.includes("Lose")) {
+//             ++computerScore;
+//         }
+//     }
 
-    if (playerScore > computerScore) {
-        gameResults = `Player Wins ${playerScore} to ${computerScore}`;
-    }
+//     if (playerScore > computerScore) {
+//         gameResults = `Player Wins ${playerScore} to ${computerScore}`;
+//     }
 
-    else if (computerScore > playerScore) {
-        gameResults = `Computer Wins ${computerScore} to ${playerScore}`;
-    }
+//     else if (computerScore > playerScore) {
+//         gameResults = `Computer Wins ${computerScore} to ${playerScore}`;
+//     }
 
-    else {
-        gameResults = `Game Tied ${playerScore} to ${computerScore}`;
-    }
+//     else {
+//         gameResults = `Game Tied ${playerScore} to ${computerScore}`;
+//     }
 
-    return gameResults;
-}
+//     return gameResults;
+// }
 
-console.log(game());
+// console.log(game());

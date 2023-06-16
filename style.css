@@ -9,27 +9,37 @@ html {
 }
 
 .header{
-  text-align: center;
-  margin: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  /* margin: 100px; */
 }
 
 .playerMoves{
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  /* gap: 20px; */
   /* min-height: 100vh; */
 }
+
 
 .playerMoves > div{
   display: flex;
   justify-content: center;
   align-items: center;
 
+  flex: 1;
   background-color: lightgray;
   border: 3px solid black;
   min-height: 100px;
-  min-width: 300px;
+  max-width: 300px;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size:x-large;
+}
 
+.playerMoveHover{
+  transform: scale(1.1);
 }
