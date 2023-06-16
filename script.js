@@ -1,44 +1,105 @@
+let playerScore = 0
+let computerScore = 0;
+
 const playerMoves = document.querySelectorAll(".playerMoves > div");
 
 playerMoves.forEach(playerMove => playerMove.addEventListener("mouseenter", e => e.target.classList.add("playerMoveHover")));
 
 playerMoves.forEach(playerMove => playerMove.addEventListener("mouseleave", e => e.target.classList.remove("playerMoveHover")));
 
-// function selectMove(e) {
-//     console.log(e.target);
-// }
+playerMoves.forEach(playerMove => playerMove.addEventListener("click", playRound));
 
-// const validMoves = ["rock", "paper", "scissors"];
+function getComputerChoice() {
 
-// function getComputerChoice() {
+    const validMoves = ["Rock", "Paper", "Scissors"];
 
-//     return validMoves[(Math.floor(Math.random() * validMoves.length))];
-// }
+    return validMoves[(Math.floor(Math.random() * validMoves.length))];
+}
 
-// // console.log(getComputerChoice());
+function playRound(e) {
 
-// function playRound(playerSelection, computerSelection) {
+    playerSelection = e.target.textContent
+    computerSelection = getComputerChoice();
+        
+    const roundResults = document.querySelector(".roundResults");
+    const htmlPlayerScore = document.querySelector(".playerScore");
+    const htmlComputerScore = document.querySelector(".computerScore");
 
-//     let results;
-//     playerSelection = playerSelection.toLowerCase().trim();
-//     computerSelection = computerSelection.toLowerCase().trim();
+    if (playerSelection === computerSelection) {
+        roundResults.innerHTML = `Tie Game! </br> ${playerSelection} equals ${computerSelection}`;
 
-//     if (playerSelection === computerSelection) {
-//         results = `Tie Game! ${playerSelection} equals ${computerSelection}`;
-//     }
-//     else if (playerSelection === "rock" && computerSelection === "paper" || playerSelection === "paper" && computerSelection == "scissors" || playerSelection === "scissors" && computerSelection === "rock") {
-//         results = `You Lose! ${computerSelection} beats ${playerSelection}`;
-//     }
-//     else {
-//         results = `You Win! ${playerSelection} beats ${computerSelection}`;
-//     }
+        ++playerScore;
+        ++computerScore;
 
-//     return results;
-// }
+    }
+    else if (playerSelection === "Rock" && computerSelection === "Paper" || playerSelection === "Paper" && computerSelection == "Scissors" || playerSelection === "Scissors" && computerSelection === "Rock") {
+        roundResults.innerHTML = `You Lose!</br>${computerSelection} beats ${playerSelection}`;
 
-// // const playerSelection = "scissors";
-// // const computerSelection = getComputerChoice();
-// // console.log(playRound(playerSelection, computerSelection));
+        ++computerScore;
+    }
+    else {
+        roundResults.innerHTML = `You Win!</br>${playerSelection} beats ${computerSelection}`;
+
+        ++playerScore;
+    }
+
+    htmlPlayerScore.textContent = playerScore.toString();
+    htmlComputerScore.textContent = computerScore.toString();
+
+    checkWinner();
+}
+
+function checkWinner() {
+    const gameResults = document.querySelector(".header");
+    let gameOver = false;
+   
+    if (computerScore == 5 && playerScore == 5) {
+        gameResults.textContent = "Tie Game!";
+        gameOver = true;
+    }
+    else if (computerScore == 5) {
+        gameResults.textContent = "Computer Wins!";
+        gameOver = true;
+    }
+    else if (playerScore == 5) {
+        gameResults.textContent = "Player Wins!";
+        gameOver = true;
+    }
+
+    if (gameOver) {
+        const playerMoves = document.querySelectorAll(".playerMoves > div");
+
+        playerMoves.forEach(playerMove => playerMove.removeEventListener("click", playRound));
+
+        const playAgainButton = document.querySelector(".playAgainButton");
+
+        playAgainButton.style.display = "flex";
+
+        playAgainButton.addEventListener("click", resetGame);
+    }
+}
+
+function resetGame(e) {
+    e.target.style.display = "none";
+    e.target.removeEventListener("click", resetGame);
+
+    const playerMoves = document.querySelectorAll(".playerMoves > div");
+    playerMoves.forEach(playerMove => playerMove.addEventListener("click", playRound));
+
+    playerScore = 0
+    computerScore = 0;
+
+    const htmlPlayerScore = document.querySelector(".playerScore");
+    const htmlComputerScore = document.querySelector(".computerScore");
+    htmlPlayerScore.textContent = playerScore;
+    htmlComputerScore.textContent = computerScore;
+
+    const roundResults = document.querySelector(".roundResults");
+    roundResults.textContent = "";
+
+    const gameHeader = document.querySelector(".header");
+    gameHeader.textContent = "Select Your Move!"
+}
 
 // function game() {
 
