@@ -27,10 +27,6 @@ function playRound(e) {
 
     if (playerSelection === computerSelection) {
         roundResults.innerHTML = `Tie Game! </br> ${playerSelection} equals ${computerSelection}`;
-
-        ++playerScore;
-        ++computerScore;
-
     }
     else if (playerSelection === "Rock" && computerSelection === "Paper" || playerSelection === "Paper" && computerSelection == "Scissors" || playerSelection === "Scissors" && computerSelection === "Rock") {
         roundResults.innerHTML = `You Lose!</br>${computerSelection} beats ${playerSelection}`;
